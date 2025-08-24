@@ -1,0 +1,9 @@
+bind = "0.0.0.0:8000"
+workers = 1
+worker_class = "uvicorn.workers.UvicornWorker"
+worker_connections = 1000
+keepalive = 5
+max_requests = 0
+max_requests_jitter = 0
+timeout = 30
+graceful_timeout = 30
