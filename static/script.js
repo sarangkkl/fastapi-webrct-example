@@ -61,7 +61,9 @@ class VideoCallApp {
         try {
             this.updateStatus('Connecting to server...');
             
-            this.socket = new WebSocket(`ws://localhost:8000/ws/${this.userId}`);
+            const protocol = window.location.protocol === 'https:' ? 'wss:' : 'ws:';
+            const host = window.location.host;
+            this.socket = new WebSocket(`${protocol}//${host}/ws/${this.userId}`);
             
             this.socket.onopen = () => {
                 this.updateStatus('Connected to server');
