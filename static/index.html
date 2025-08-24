@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple Video Call App</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Simple Video Call App</h1>
+        
+        <div class="controls">
+            <input type="text" id="roomId" placeholder="Enter Room ID" value="room123">
+            <button id="joinRoom">Join Room</button>
+            <button id="startCall" disabled>Start Call</button>
+            <button id="endCall" disabled>End Call</button>
+        </div>
+        
+        <div class="video-container">
+            <div class="video-wrapper">
+                <video id="localVideo" autoplay muted playsinline></video>
+                <label>You</label>
+            </div>
+            <div class="video-wrapper">
+                <video id="remoteVideo" autoplay playsinline></video>
+                <label>Remote</label>
+            </div>
+        </div>
+        
+        <div class="status">
+            <p id="statusText">Enter a room ID and click Join Room to start</p>
+        </div>
+        
+        <!-- Incoming Call Modal -->
+        <div id="incomingCallModal" class="modal hidden">
+            <div class="modal-content">
+                <h2>Incoming Call</h2>
+                <p id="callerInfo">Someone is calling you...</p>
+                <div class="call-buttons">
+                    <button id="answerCall" class="answer-btn">📞 Answer</button>
+                    <button id="declineCall" class="decline-btn">📞 Decline</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <audio id="ringtone" loop>
+        <source src="data:audio/wav;base64,UklGRnoGAABXQVZFZm10IBAAAAABAAEAQB8AAEAfAAABAAgAZGF0YQoGAACBhYqFbF1fdJivrJBhNjVgodDbq2EcBj+a2/LDciUFLIHO8tiJNwgZaLvt559NEAxQp+PwtmMcBjiR1/LMeSwFJHfH8N2QQAoUXrTp66hVFApGn+LyvmshCj2W2+3KdSUGKnjJ8N2QQAoUXrTp66hVFApGn+LyvmshCj2W2+3KdSUGKnjJ8N2QQAoUXrTp66hVFApGn+LyvmshCj2W2+3KdSUGKnjJ8N2QQAoUXrTp66hVFApGn+LyvmshCj2W2+3KdSUGKnjJ8N2QQAoUXrTp66hVFApGn+LyvmshCj2W2+3KdSUGKnjJ8N2QQAoUXrTp66hVFApGn+LyvmshCj2W2+3KdSUGKnjJ8N2QQAoUXrTp66hVFApGn+LyvmshCj2W2+3KdSUGKnjJ8N2QQAoUXrTp66hVFApGn+LyvmshCj2W2+3KdSUGKnjJ8N2QQAoUXrTp66hVFApGn+LyvmshCj2W2+3KdSUGKnjJ8N2QQAoUXrTp66hVFApGn+LyvmshCj2W2+3KdSUGKnjJ8N2QQAoUXrTp66hVFApGn+LyvmshCj2W2+3KdSUGKnjJ8N2QQAoUXrTp66hVFApGn+LyvmshCj2W2+3KdSUGKnjJ8N2QQAoUXrTp66hVFApGn+LyvmshCj2W2+3KdSUGKnjJ8N2QQAoUXrTp66hVFA==" type="audio/wav">
+    </audio>
+    
+    <script src="/static/script.js"></script>
+</body>
+</html>
