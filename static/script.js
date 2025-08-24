@@ -254,6 +254,16 @@ class VideoCallApp {
                 return;
             }
             
+            console.log('Current signaling state:', this.peerConnection.signalingState);
+            
+            if (this.peerConnection.signalingState !== 'stable') {
+                console.error('Wrong signaling state for offer:', this.peerConnection.signalingState);
+                // Reset the peer connection to stable state
+                this.endCall();
+                this.updateStatus('Connection state error - please try again');
+                return;
+            }
+            
             console.log('Setting remote description from offer');
             await this.peerConnection.setRemoteDescription(message.offer);
             
@@ -288,6 +298,19 @@ class VideoCallApp {
     
     async handleAnswer(message) {
         try {
+            if (!this.peerConnection) {
+                console.error('No peer connection when handling answer');
+                return;
+            }
+            
+            console.log('Current signaling state:', this.peerConnection.signalingState);
+            
+            if (this.peerConnection.signalingState !== 'have-local-offer') {
+                console.error('Wrong signaling state for answer:', this.peerConnection.signalingState);
+                this.updateStatus('Connection state error - please try again');
+                return;
+            }
+            
             console.log('Setting remote description from answer');
             await this.peerConnection.setRemoteDescription(message.answer);
             
@@ -394,6 +417,11 @@ class VideoCallApp {
         }
         
         if (this.peerConnection) {
+            // Properly close the peer connection
+            this.peerConnection.onicecandidate = null;
+            this.peerConnection.ontrack = null;
+            this.peerConnection.onconnectionstatechange = null;
+            this.peerConnection.oniceconnectionstatechange = null;
             this.peerConnection.close();
             this.peerConnection = null;
         }
